@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ContainerData from './ContainerData';
+import { Style } from './styled';
 
 export interface Cont {
     cont?: string
@@ -22,14 +23,14 @@ const Container = (props: Cont) => {
     }
 
     return (
-        <div>
+        <Style>
             <div>
                 <button onClick={() => handleClick(0)}>get Data</button>
             </div>
             <div>
                 <ContainerData onClick={() => handleClick(0)} data={state} array={props.array} />
             </div>
-        </div>
+        </Style>
     )
 }
 
