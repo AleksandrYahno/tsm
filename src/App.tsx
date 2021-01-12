@@ -1,23 +1,48 @@
 import React from 'react';
-import { observer } from 'mobx-react-lite';
-import Container from './components/Container';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
+
 import PdfTronContainer from './components/PdfTronContainer';
 import CounterContainer from './components/counter/CounterContainer';
 import ContainerTodo from './components/counter/ContainerTodo';
 
-const url = 'https://jsonplaceholder.typicode.com/posts'
+export function App() {
+  return (
+    <div>
+      <Router>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/'>Home</Link>
+            </li>
+            <li>
+              <Link to='/pdftron'>PdfTron</Link>
+            </li>
+            <li>
+              <Link to='/counter'>Counter</Link>
+            </li>
+            <li>
+              <Link to='/todo'>Todo</Link>
+            </li>
+          </ul>
+        </nav>
 
-const App = () => {
-    // console.log('observer : ', observer)
+        <Switch>
+          <Route exact path='/' component={() => (<div>path="/"</div>)} />
+          <Route exact path='/pdftron' component={PdfTronContainer} />
+          <Route exact path='/counter' component={CounterContainer} />
+          <Route exact path='/todo' component={ContainerTodo} />
+          <Route path='*'>
+            <Redirect to='/' />
+          </Route>
+        </Switch>
+      </Router>
 
-    return (
-        <div>
-            <PdfTronContainer />
-            <Container cont={url} array={false}/>
-            <CounterContainer />
-            <ContainerTodo />
-        </div>
-    );
+    </div>
+  );
 }
-
-export default App;
